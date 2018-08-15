@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import MDFTextAccessibility
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -36,6 +37,12 @@ class CategoryViewController: SwipeTableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text  = categories?[indexPath.row].name ?? "No categories added yet"
+        
+        cell.backgroundColor = UIColor(categories?[indexPath.row].color ?? "#1D9BF6")
+        
+        cell.textLabel?.textColor = MDFTextAccessibility.textColor(onBackgroundColor: cell.backgroundColor!, targetTextAlpha: 1, font: nil)
+        
+
         
 
         
@@ -94,6 +101,8 @@ class CategoryViewController: SwipeTableViewController {
             let newCategory = Category()
             newCategory.name = textField.text!
             
+            newCategory.color = self.generateRandomColor().hexString()
+            
             self.save(category: newCategory)
             
          
@@ -125,6 +134,7 @@ class CategoryViewController: SwipeTableViewController {
             destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
+    
 }
 
 

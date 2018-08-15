@@ -1,26 +1,34 @@
 PODS:
+  - MDFTextAccessibility (1.2.0)
   - Realm (3.7.5):
     - Realm/Headers (= 3.7.5)
   - Realm/Headers (3.7.5)
   - RealmSwift (3.7.5):
     - Realm (= 3.7.5)
   - SwipeCellKit (2.4.3)
+  - UIColor_Hex_Swift (4.0.2)
 
 DEPENDENCIES:
+  - MDFTextAccessibility
   - RealmSwift
   - SwipeCellKit
+  - UIColor_Hex_Swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - MDFTextAccessibility
     - Realm
     - RealmSwift
     - SwipeCellKit
+    - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
   SwipeCellKit: cee9906e6d3a36e22ad1a852fba7f8fa0839d113
+  UIColor_Hex_Swift: 2fb123c7d864994a5137ef57c4dc55e17a657d29
 
-PODFILE CHECKSUM: 43d9b2c7d7562853e7ee9a2233d07d2c433e02a8
+PODFILE CHECKSUM: 342749115abd3933de18da4d4edc1d8c63592071
 
 COCOAPODS: 1.5.3

@@ -8,6 +8,9 @@
 
 import UIKit
 import RealmSwift
+import UIColor_Hex_Swift
+import MDFTextAccessibility
+
 
 class TodoListViewController: SwipeTableViewController {
     
@@ -45,6 +48,21 @@ class TodoListViewController: SwipeTableViewController {
         
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
+            
+            let parentColor : String = (item.parentCategory.first?.color)!
+            if let color = UIColor(parentColor).darkerColor(percent: Double(CGFloat(CGFloat(indexPath.row) / CGFloat(todoItems!.count)))) {
+                cell.backgroundColor = color
+                
+                cell.textLabel?.textColor = MDFTextAccessibility.textColor(onBackgroundColor: color, targetTextAlpha: 1, font: nil)
+            }
+            
+
+            
+            
+            
+            
+            
+            
             cell.accessoryType = item.done ? .checkmark : .none
         } else {
             cell.textLabel?.text = "No items added"
@@ -167,6 +185,26 @@ extension TodoListViewController: UISearchBarDelegate {
         }
     }
 
+}
+
+extension UIColor {
+    
+    func darkerColor(percent : Double) -> UIColor? {
+        return colorWithBrightnessFactor(factor: CGFloat(1 - percent));
+    }
+    
+    func colorWithBrightnessFactor(factor: CGFloat) -> UIColor {
+        var hue : CGFloat = 0
+        var saturation : CGFloat = 0
+        var brightness : CGFloat = 0
+        var alpha : CGFloat = 0
+        
+        if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
+            return UIColor(hue: hue, saturation: saturation, brightness: brightness * factor, alpha: alpha)
+        } else {
+            return self;
+        }
+    }
 }
 
 

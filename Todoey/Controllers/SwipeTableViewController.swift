@@ -8,6 +8,7 @@
 
 import UIKit
 import SwipeCellKit
+import UIColor_Hex_Swift
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
@@ -19,6 +20,10 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         super.viewDidLoad()
         
         tableView.rowHeight = 80.0
+        
+        
+        tableView.separatorStyle = .none
+    
 
 
     }
@@ -56,7 +61,8 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SwipeTableViewCell
         
         cell.delegate = self
-
+        
+        
         return cell
         
     }
@@ -64,6 +70,19 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func updateModel(at indexPath: IndexPath) {
         //Update data model
     }
+    
+    func generateRandomColor() -> UIColor {
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
+        
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    }
+    
+    
+    //MARK: - Color Initialization
+    
+
 
 }
 
