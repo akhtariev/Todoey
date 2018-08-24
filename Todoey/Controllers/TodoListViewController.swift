@@ -14,6 +14,8 @@ import MDFTextAccessibility
 
 class TodoListViewController: SwipeTableViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var todoItems : Results<Item>?
     var selectedCategory : Category? {
         didSet{ // as son as we set the category the following get executed
@@ -29,11 +31,51 @@ class TodoListViewController: SwipeTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        title = selectedCategory?.name
+        
+       
+        guard let colourHex = selectedCategory?.color else {fatalError()}
+        
+        
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: MDFTextAccessibility.textColor(onBackgroundColor: UIColor(colourHex), targetTextAlpha: 1, font: nil)]
+
+        
+        updateNavBar(withHexCode: colourHex)
+            
+        
         
         
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        
+        updateNavBar(withHexCode: "#1D9BF6")
+        
+    }
+    
+    //MARK: - Nav Bar Setup Methods
+    
+    func updateNavBar(withHexCode colourHex: String) {
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist")}
+        
+        
+        let color = UIColor(colourHex)
+        
+        navBar.barTintColor = color
+        
+        
+        searchBar.barTintColor = color
+        
+        navBar.tintColor = MDFTextAccessibility.textColor(onBackgroundColor: color, targetTextAlpha: 1, font: nil)
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoItems?.count ?? 1
